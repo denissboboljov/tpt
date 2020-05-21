@@ -1,0 +1,34 @@
+apt update
+apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+apt update
+apt-cache policy docker-ce
+apt install docker-ce
+systemctl status docker
+mkdir deniss && cd deniss && nano Dockerfile
+
+FROM node:latest
+WORKDIR /deniss
+RUN apt-get update && \
+apt-get install -y nginx
+COPY tpt/docker/javascript/ ./
+RUN npm install && npm run ng build -- --output-path=/var/www/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+git clone https://github.com/pannoi/tpt.git
+docker build -t boboljov .
+docker run -it -p 80:80 boboljov
+apt-get remove iceweasel
+echo -e "\ndeb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | tee -a /etc/apt/sources.list > /dev/null
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C1289A29
+apt-get update
+apt-get install firefox-mozilla-build
+
+
+--------------
+/na linukse tolko kommandnaja stroka
+open Firefox 
+localhost
+
