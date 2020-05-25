@@ -20,6 +20,8 @@ CMD ["nginx", "-g", "daemon off;"]
 git clone https://github.com/pannoi/tpt.git
 docker build -t boboljov .
 docker run -it -p 80:80 boboljov
+
+
 apt-get remove iceweasel
 echo -e "\ndeb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | tee -a /etc/apt/sources.list > /dev/null
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C1289A29
